@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>List Events</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+    <link href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.4/css/bootstrap.min.css"
+          th:href="@{/webjars/bootstrap/3.3.5/css/bootstrap.min.css}"
+          rel="stylesheet" media="screen"/>
+
+    <script src="http://cdn.jsdelivr.net/webjars/jquery/2.1.4/jquery.min.js"
+            th:src="@{/webjars/jquery/2.1.4/jquery.min.js}"></script>
+
+    <link href="../../static/css/spring-core.css"
+          th:href="@{css/spring-core.css}" rel="stylesheet" media="screen"/>
+</head>
+<body>
+<div class="container">
+    <div th:if="${not #lists.isEmpty(events)}">
+        <h2>Event List</h2>
+        <table class="table table-striped">
+            <tr>
+                <th>Id</th>
+                <th>Description</th>
+                <th>Price</th>
+                <th>Image URL</th>
+                <th>List</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+            <tr th:each="event : ${events}">
+                <td th:text="${event.id.toHexString()}"></td>
+                <td th:text="${event.description}"></td>
+                <td th:text="${event.price}"></td>
+                <td th:text="${event.imageUrl}"></td>
+                <td><a th:href="${'/event/show/' + event.id.toHexString()}">View</a> </td>
+                <td><a th:href="${'/event/edit/' + event.id.toHexString()}">Edit</a> </td>
+                <td><a th:href="${'/event/delete/' + event.id.toHexString()}">Delete</a> </td>
+            </tr>
+        </table>
+    </div>
+    <div class="row">
+        <div class="col-sm-3">
+            <a href="/event/new">New Event</a>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
